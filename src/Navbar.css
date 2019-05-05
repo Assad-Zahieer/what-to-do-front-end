@@ -1,0 +1,22 @@
+
+.navbar{
+    background-color:#3498db;
+
+
+    
+}
+.navbar h1{
+    font-family: Arial;
+    display: inline;
+   
+  
+}
+
+.navbar img{
+   position: fixed;
+   right: 2%;
+    width: 20px;
+    height: 20px;
+    
+    
+}
