@@ -4,6 +4,7 @@ import Input from './Input.js'
 import Display from './Display.js';
 import Completed from './Completed.js';
 import Navbar from './navbar.js';
+import './App.css';
 
 class App extends Component {
 
@@ -43,44 +44,50 @@ class App extends Component {
 
   render() {
     return (
-      <html>
 
-        <head>
-          <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossOrigin="anonymous" />
-        </head>
+      
 
-        <body>
+        <div>
 
-        <Navbar />
+        <Navbar/>
 
+       
+
+
+        <div className ="container col-sm-12">
+        <div className="row">
+        <div className="col"></div>
+        <div className ="col-5" id="Input">
         <Input getTask={this.getTask} />
-
-        <h3>To do ...</h3>
-        {this.state.itemList.filter(items => items.status === true)
-          .map((items, i) =>
-            <Display key={i} item={items.item} id={items.item_id} status={items.status}
-              getTask={this.getTask}
-            />
-          )
-        }
-
-        <h3>Done</h3>
-        {this.state.itemList.filter(items => items.status === false)
-          .map((items, i) =>
-
-            <Completed key={i} item={items.item} id={items.item_id} status={items.status}
-              getTask={this.getTask}
-            />
-          )
-        }
-
-        </body>
-
+        </div>
+        <div className="col"></div>
+        </div>
+        
         
 
+<h3>To do ...</h3>
+{this.state.itemList.filter(items => items.status === true)
+  .map((items, i) =>
+    <Display key={i} item={items.item} id={items.item_id} status={items.status}
+      getTask={this.getTask}
+    />
+  )
+}
+<div className="done">
+<h3>Done</h3>
+{this.state.itemList.filter(items => items.status === false)
+  .map((items, i) =>
 
-      </html>
+    <Completed key={i} item={items.item} id={items.item_id} status={items.status}
+      getTask={this.getTask}
+    />
+  )
+}
+</div>
+
+        </div>
+        </div>
+ 
 
     )
   }

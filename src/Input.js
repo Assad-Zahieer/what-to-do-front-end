@@ -42,14 +42,23 @@ export default class Input extends Component{
     render(){
         return(
             <form>
-                <div id = "tasks">
-                    <input type = "text" id ="myText" placeholder="Enter task" onChange = {this.addItem} value= {this.state.item}/>
-                    <button type ="button" onClick = {this.sendItem} > Add Task</button>
+            <div className="form-inline">
+            <div className = "form-group mr-2">
+                    <input type = "text" className="form-control" id ="myText" placeholder="Enter task" onChange = {this.addItem} value= {this.state.item}/>
+                    </div>
+                    <div className="form-group mr-2">
+                    <button type ="button" className="btn btn-primary" onClick = {this.sendItem} >Add</button>
+                    </div>
+                   
+            </div>
+                
+                    
+                    
                     
 
                     
 
-                </div>
+                
             </form>
         )
     }
