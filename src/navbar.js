@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import './Navbar.css';
+import {CONNECTION} from './constants.js';
 
 export default class Navbar extends Component {
 constructor(props){
@@ -32,7 +33,7 @@ confirmPass = (g) => {
 
 sendDetails = () => {
   
-    let URL = "http://localhost:8080/api/v2/users"
+    let URL = `http://${CONNECTION}:8080/api/v2/users`
     let postty = new XMLHttpRequest();
     postty.open('POST', URL, true);
     postty.setRequestHeader("Content-Type", "application/json");

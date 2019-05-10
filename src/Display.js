@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import { arrayExpression } from "@babel/types";
-
+import {CONNECTION} from './constants.js';
 
 export default class Display extends Component {
     state = {
@@ -13,7 +13,7 @@ export default class Display extends Component {
 
     removeTask = (e) => {
         let id = e.target.className;
-        let URL = "http://localhost:8080/api/v1/items/" + id;
+        let URL = `http://${CONNECTION}:8080/api/v1/items/` + id;
         let delly = new XMLHttpRequest();
         delly.open('DELETE', URL);
         delly.onload = () => {
@@ -26,7 +26,7 @@ export default class Display extends Component {
 
     changeStatusToCompleted = (f) => {
         let id = f.target.className;
-        let URL = "http://localhost:8080/api/v1/items/" + id;
+        let URL = `http://${CONNECTION}:8080/api/v1/items/` + id;
         let toCompleted = new XMLHttpRequest();
         toCompleted.open('PUT', URL)
         toCompleted.setRequestHeader("Content-Type", "application/json");
@@ -58,7 +58,7 @@ export default class Display extends Component {
 
     submitUpdate = () => {
 
-        let URL = "http://localhost:8080/api/v1/items/" + this.props.id;
+        let URL = `http://${CONNECTION}:8080/api/v1/items/` + this.props.id;
         let toCompleted = new XMLHttpRequest();
         toCompleted.open('PUT', URL)
         toCompleted.setRequestHeader("Content-Type", "application/json");

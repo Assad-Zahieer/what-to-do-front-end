@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 // import { arrayExpression } from "@babel/types";
+import {CONNECTION} from './constants.js';
 
 
 export default class Completed extends Component {
@@ -8,7 +9,7 @@ export default class Completed extends Component {
 
 removeTask = (e) =>{
     let id = e.target.className;
-    let URL ="http://localhost:8080/api/v1/items/" + id;
+    let URL =`http://${CONNECTION}:8080/api/v1/items/` + id;
     let delly = new XMLHttpRequest();
     delly.open('DELETE', URL);
     delly.onload = () => {
@@ -22,7 +23,7 @@ removeTask = (e) =>{
 
 changeStatusToUncomplete = (f) => {
     let id = f.target.className;
-    let URL ="http://localhost:8080/api/v1/items/" + id;
+    let URL =`http://${CONNECTION}:8080/api/v1/items/` + id;
     let toUncompleted = new XMLHttpRequest();
     toUncompleted.open('PUT', URL)
     toUncompleted.setRequestHeader("Content-Type", "application/json");

@@ -5,6 +5,7 @@ import Display from './Display.js';
 import Completed from './Completed.js';
 import Navbar from './navbar.js';
 import './App.css';
+import {CONNECTION} from './constants.js';
 
 class App extends Component {
 
@@ -18,7 +19,7 @@ class App extends Component {
 
   getTask = () => {
 
-    let URL = "http://localhost:8080/api/v1/items"
+    let URL = `http://${CONNECTION}:8080/api/v1/items`
     let getty = new XMLHttpRequest();
     let response1;
     getty.responseType = "json";
