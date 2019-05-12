@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 // import { arrayExpression } from "@babel/types";
-import {CONNECTION} from './constants.js';
+import { CONNECTION } from './constants.js';
+import './Display.css';
 
 export default class Display extends Component {
     state = {
@@ -11,8 +12,8 @@ export default class Display extends Component {
 
 
 
-    removeTask = (e) => {
-        let id = e.target.className;
+    removeTask = () => {
+        let id = this.props.id;
         let URL = `http://${CONNECTION}:8080/api/v1/items/` + id;
         let delly = new XMLHttpRequest();
         delly.open('DELETE', URL);
@@ -24,8 +25,8 @@ export default class Display extends Component {
 
     }
 
-    changeStatusToCompleted = (f) => {
-        let id = f.target.className;
+    changeStatusToCompleted = () => {
+        let id = this.props.id;
         let URL = `http://${CONNECTION}:8080/api/v1/items/` + id;
         let toCompleted = new XMLHttpRequest();
         toCompleted.open('PUT', URL)
@@ -50,9 +51,9 @@ export default class Display extends Component {
 
     }
 
-    addUpdatedItem = (e) =>{
+    addUpdatedItem = (e) => {
         this.setState({
-            updateItem:e.target.value
+            updateItem: e.target.value
         })
     }
 
@@ -70,7 +71,7 @@ export default class Display extends Component {
         toCompleted.send(JSON.stringify({
             "item_id": this.props.id,
             "item": this.state.updateItem,
-        
+
         }));
         this.setState({
             bool: true
@@ -80,31 +81,42 @@ export default class Display extends Component {
 
     render() {
 
-        if(this.state.bool === true){
+        if (this.state.bool === true) {
             return (
                 <div>
-    
-                    <p id={this.props.id}>
-                        Item:  {this.props.item}
-                 </p>
-    
-                    <button className={this.props.id} type="button" onClick={this.removeTask}>Remove</button>
-                    <button className={this.props.id} type="button" onClick={this.changeStatusToCompleted}>Done</button>
-                    <button className={this.props.id} type="button" onClick={this.editItems} >Edit</button>
+                    <div className="container col-sm-12">
+                        <div className="row">
+                            <div className="col-8">
+                                <p id={this.props.id}>
+                                    Item:  {this.props.item}
+                                </p>
+                            </div>
+                            <div className="col">
+                                <div className="btn-group">
+                                    <button className="btn btn-dark"type="button" onClick={this.editItems} > ✎ </button>
+                                    <button className="btn btn-light" type="button" onClick={this.changeStatusToCompleted}> ✓ </button>
+                                    <button className="btn btn-dark" type="button" onClick={this.removeTask}> ✗ </button>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-    
+
+
             )
         }
-        else{
-            return(
+        else {
+            return (
                 <div>
-                <input type ="text"  className="form-control" id="update" placeholder="Enter task" onChange={this.addUpdatedItem} value={this.state.updateItem}/>
-                <button type="button" onClick={this.submitUpdate} >Add</button>
-            </div>
+                    <input type="text" className="form-control" id="update" placeholder="Enter task" onChange={this.addUpdatedItem} value={this.state.updateItem} />
+                    <button type="button" onClick={this.submitUpdate} >Add</button>
+                </div>
             )
         }
-          
-        
+
+
     }
 
 }

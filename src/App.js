@@ -12,9 +12,14 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      itemList: []
+      itemList: [],
+      userID: this.props.userID,
+      email: this.props.email,
+    password: this.props.password
+    
 
     }
+    
   }
 
   getTask = () => {
@@ -39,20 +44,83 @@ class App extends Component {
 
   componentDidMount() {
     this.getTask();
+    this.setState({
+      userID:this.state.userID
+    })
 
   }
+  addEmail = (e) => {
+    this.setState({
+      email: e.target.value
+    })
+  }
+  addPassword = (f) => {
+    this.setState({
+      password: f.target.value
+    })
+  }
+  loginCheck = () => {
+
+    let URL = `http://${CONNECTION}:8080/api/v2/users/` + this.state.email + `/` + this.state.password
+    let getty = new XMLHttpRequest();
+    let validation;
+    getty.responseType = "json";
+    getty.open('GET', URL);
+    getty.setRequestHeader("Content-Type", "application/json");
+    getty.setRequestHeader("Accept", "application/json");
+    getty.onload = () => {
+      validation = getty.response;
+      this.setState({
+        email: "",
+        password : "",
+        userID: validation
+      })
+  
+    }
+  
+    getty.send();
+  }
+
+  logout = () => {
+      this.setState({
+        email: "",
+        password : "",
+        userID: undefined
+      })
+      
+  
+    }
+  
+  
 
 
   render() {
-    return (
+    
+    
+    if(this.state.userID === undefined){
+return(
+  <div>
+  <Navbar userID={this.props.userID}/>
+  <form className="box" action="index.html" method="post">
+  <h1>Login</h1>
+  <input type="email" id="loginEmail" placeholder="Email" onChange={this.addEmail} value={this.state.email}/>
+  <input type="password"id="loginPassword" placeholder="Password" onChange={this.addPassword} value={this.state.password}/>
+  <input type="button" className="btn btn-primary" value="Login" onClick={this.loginCheck} />
+</form>
+  </div>
+
+)      
+
+    }else{
+      return (
 
       
 
         <div>
 
-        <Navbar/>
+        <Navbar userID = {0} logout={this.logout}/>
 
-       
+  
 
 
         <div className ="container col-sm-12">
@@ -92,6 +160,8 @@ class App extends Component {
 
     )
   }
+    }
+    
 }
 
 export default App;

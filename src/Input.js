@@ -55,9 +55,6 @@ export default class Input extends Component{
                 
                     
                     
-                    
-
-                    
 
                 
             </form>

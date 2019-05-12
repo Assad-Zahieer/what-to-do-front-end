@@ -7,8 +7,8 @@ export default class Completed extends Component {
 
 
 
-removeTask = (e) =>{
-    let id = e.target.className;
+removeTask = () =>{
+    let id = this.props.id;
     let URL =`http://${CONNECTION}:8080/api/v1/items/` + id;
     let delly = new XMLHttpRequest();
     delly.open('DELETE', URL);
@@ -21,8 +21,8 @@ removeTask = (e) =>{
 }
 
 
-changeStatusToUncomplete = (f) => {
-    let id = f.target.className;
+changeStatusToUncomplete = () => {
+    let id = this.props.id;
     let URL =`http://${CONNECTION}:8080/api/v1/items/` + id;
     let toUncompleted = new XMLHttpRequest();
     toUncompleted.open('PUT', URL)
@@ -46,23 +46,21 @@ changeStatusToUncomplete = (f) => {
         
         return (
 
-            
-            <div>
-                
-             
-                <p id = {this.props.id}>
+            <div className="container col-sm-12">
+             <div className="row">
+             <div className="col-8">
+             <p id = {this.props.id}>
                 Item:  {this.props.item}
 
-                
-
                 </p>
-             
-          <button className={this.props.id} type ="button" onClick={this.removeTask}>Remove</button>
-          <button className={this.props.id} type="button" onClick={this.changeStatusToUncomplete}>Restore</button>
+             </div>
+             <div className="col">
+             <button className="btn btn-dark" type ="button" onClick={this.removeTask}>✗ </button>
+          <button className="btn btn-light" type="button" onClick={this.changeStatusToUncomplete}>Restore</button>
       
-
-                
-                
+             </div>
+             
+             </div>      
             </div>
             
         )
