@@ -61,24 +61,32 @@ class App extends Component {
   }
   loginCheck = () => {
 
-    let URL = `http://${CONNECTION}:8080/api/v2/users/` + this.state.email + `/` + this.state.password
-    let getty = new XMLHttpRequest();
-    let validation;
-    getty.responseType = "json";
-    getty.open('GET', URL);
-    getty.setRequestHeader("Content-Type", "application/json");
-    getty.setRequestHeader("Accept", "application/json");
-    getty.onload = () => {
-      validation = getty.response;
-      this.setState({
-        email: "",
-        password : "",
-        userID: validation
-      })
-  
+    if(this.state.email === "" || this.state.password ===""){
+
+    }else{
+      let URL = `http://${CONNECTION}:8080/api/v2/users/` + this.state.email + `/` + this.state.password
+      let getty = new XMLHttpRequest();
+      let validation;
+      getty.responseType = "json";
+      getty.open('GET', URL);
+      getty.setRequestHeader("Content-Type", "application/json");
+      getty.setRequestHeader("Accept", "application/json");
+      getty.onload = () => {
+        validation = getty.response;
+        console.log(validation);
+        this.setState({
+          email: "",
+          password : "",
+          userID: validation
+        })
+        console.log(this.state);
+        console.log(typeof this.state.userID)
+    
+      }
+    
+      getty.send();
     }
-  
-    getty.send();
+
   }
 
   logout = () => {
@@ -97,7 +105,7 @@ class App extends Component {
   render() {
     
     
-    if(this.state.userID === undefined){
+    if(this.state.userID === undefined || this.state.userID === 0){
 return(
   <div>
   <Navbar userID={this.props.userID}/>
