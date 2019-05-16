@@ -24,7 +24,7 @@ class App extends Component {
 
   getTask = () => {
 
-    let URL = `http://${CONNECTION}:8080/api/v1/items`
+    let URL = `/api/v1/items`
     let getty = new XMLHttpRequest();
     let response1;
     getty.responseType = "json";
@@ -64,7 +64,7 @@ class App extends Component {
     if(this.state.email === "" || this.state.password ===""){
 
     }else{
-      let URL = `http://${CONNECTION}:8080/api/v2/users/` + this.state.email + `/` + this.state.password
+      let URL = `/api/v2/users/` + this.state.email + `/` + this.state.password
       let getty = new XMLHttpRequest();
       let validation;
       getty.responseType = "json";

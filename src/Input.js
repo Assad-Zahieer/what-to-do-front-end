@@ -17,7 +17,7 @@ export default class Input extends Component{
     }
     
     sendItem = () => {
-        let URL = `http://${CONNECTION}:8080/api/v1/items`
+        let URL = `/api/v1/items`
         let postty = new XMLHttpRequest();
         postty.open('POST', URL, true);
         postty.setRequestHeader("Content-Type", "application/json");

@@ -14,7 +14,7 @@ export default class Display extends Component {
 
     removeTask = () => {
         let id = this.props.id;
-        let URL = `http://${CONNECTION}:8080/api/v1/items/` + id;
+        let URL = `/api/v1/items/` + id;
         let delly = new XMLHttpRequest();
         delly.open('DELETE', URL);
         delly.onload = () => {
@@ -27,7 +27,7 @@ export default class Display extends Component {
 
     changeStatusToCompleted = () => {
         let id = this.props.id;
-        let URL = `http://${CONNECTION}:8080/api/v1/items/` + id;
+        let URL = `/api/v1/items/` + id;
         let toCompleted = new XMLHttpRequest();
         toCompleted.open('PUT', URL)
         toCompleted.setRequestHeader("Content-Type", "application/json");
@@ -59,7 +59,7 @@ export default class Display extends Component {
 
     submitUpdate = () => {
 
-        let URL = `http://${CONNECTION}:8080/api/v1/items/` + this.props.id;
+        let URL = `/api/v1/items/` + this.props.id;
         let toCompleted = new XMLHttpRequest();
         toCompleted.open('PUT', URL)
         toCompleted.setRequestHeader("Content-Type", "application/json");
